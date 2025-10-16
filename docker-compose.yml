@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: ./backend
+    container_name: remoteconnect-backend
+    ports:
+      - "8081:8081"
+    networks:
+      - remoteconnect-net
+
+  frontend:
+    build: ./frontend
+    container_name: remoteconnect-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - remoteconnect-net
+
+networks:
+  remoteconnect-net:
+    driver: bridge
